@@ -23,7 +23,7 @@ def ptintArray(array: list) :
 ptintArray(array)
 
 def playerTurn() :
-    print(f'ваш ход. Выбирете сколько число 0<X<9')
+    print(f'ваш ход. Выбирете сколько число 1<X<=9/x')
     tempInt = int(input())
     if (0 <= tempInt < 9) and ( array[tempInt] == " . " ):
         array[tempInt] = "X"
@@ -83,40 +83,42 @@ def XO_gameIter(value:int) ->str :
         if winnercheck() :
             tempStr +=" вы победили !!!!!!!!\n"
             tempStr +="Еще разок ? \n"
+            flagInGame = False
             return tempStr;
 
         botTurn()
+        tempStr += "\n ход противника \n"
+        tempStr += arrayToStr(array)
+        
         if winnercheck() :
             tempStr +="вы проиграли !!!!!!!! \n"
             tempStr +="Еще разок ? \n"
-            flagInGame = false
+            flagInGame = False
             return tempStr
-        
-        tempStr += "\n ход противника \n"
-        tempStr += arrayToStr(array)
 
         if " . " not in array:
             tempStr +="Ничья !!!!!!!! \n"
             tempStr +="Еще разок ? \n"
-            flagInGame = false
+            flagInGame = False
             return tempStr
 
-        tempStr += "ваш ход. Выбирете сколько число 0<X<9"        
+        tempStr += "ваш ход. Выбирете сколько число 1<X<=9\n"        
     else:
-        tempStr = '!!!! некоректное значение'
+        tempStr = f'!!!! некоректное значение  {value}'
     return tempStr;
 
 
 
 def XO_startGame() ->str :
     global flagInGame
+    global array
     array = [" . "," . "," . "," . "," . "," . "," . "," . "," . ",]
     tempStr = "Начинаем игру \n"
     flagInGame = True
     if (random.randint(0, 1) == 0):
         botTurn()
 
-    tempStr = "ваш ход. Выбирете сколько число 0<X<9"
+    tempStr = "ваш ход. Выбирете сколько число 1<X<=9\n"
     tempStr += arrayToStr(array)
     return tempStr;
 
